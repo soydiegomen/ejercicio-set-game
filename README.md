@@ -15,8 +15,13 @@ Detalles del proyecto ...
 
 [Pendiente]
 
-#Levantar servidor local (Express.js Server)
+* Levantar servidor local (Express.js Server)  
 $ node server.js 
+
+* Para probar el servicio que retorna los posibles sets validos, utilizar la siguiente url
+http://localhost:3000/games/get_valid_sets
+
+
 
 - - -
 

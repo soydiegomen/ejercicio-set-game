@@ -9,9 +9,18 @@ const getValidSets = function (req, res) {
 function runSetGame(){
 	let cardsArray = gameHelper.getDummyDeck();
 	//let result = getValidShapeArray(cardsArray);
-	let result = getValidArrayByFeature(cardsArray, 'shape');
+	let validShapes = getValidArrayByFeature(cardsArray, 'shape');
+	let validColors = getValidArrayByFeature(cardsArray, 'color');
+	let validNumbers = getValidArrayByFeature(cardsArray, 'number');
+	let validShading = getValidArrayByFeature(cardsArray, 'shading');
 	    
-	//return grupedCardsByShape;
+	let result = {
+		validShapes,
+		validColors,
+		validNumbers,
+		validShading
+	}
+
 	return result;
 }
 
@@ -95,7 +104,6 @@ function getValidArrayByFeature(cardsArray, feature){
 	})
 
 	let finalValidShapes = getValidItemsBySize(validShapes, feature);
-	console.log('tamaño', finalValidShapes.length);
 
 	return finalValidShapes;
 }
