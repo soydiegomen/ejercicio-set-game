@@ -8,15 +8,14 @@ const getValidSets = function (req, res) {
 
 function runSetGame(){
 	let cardsArray = gameHelper.getDummyDeck();
-	let result = getValidShapeArray(cardsArray);
-	
-    
+	//let result = getValidShapeArray(cardsArray);
+	let result = getValidArrayByFeature(cardsArray, 'shape');
+	    
 	//return grupedCardsByShape;
 	return result;
 }
 
-//Debe crear un arreglo de dos dimesiones
-function getValidShapeArray(cardsArray){
+function getValidArrayByFeature(cardsArray, feature){
 	let validShapes = [];
 	cardsArray.forEach(function(card, x) {
 
@@ -37,12 +36,12 @@ function getValidShapeArray(cardsArray){
 
 				for(let index = 0; index < items.length; index++){
 
-					allAreEqueal = allAreEqueal && (card.shape === items[index].shape);
-					allAreDifferent = allAreDifferent && (card.shape !== items[index].shape);
+					allAreEqueal = allAreEqueal && (card[feature] === items[index][feature]);
+					allAreDifferent = allAreDifferent && (card[feature] !== items[index][feature]);
 
 					if(index > 0){
 						//Permite saber si todo el arreglo es del mismo shape (si dos items son del mismo shape, todos los del arreglo lo son)
-						isArrayWithTheSameShape = isArrayWithTheSameShape && (items[index-1].shape === items[index].shape);
+						isArrayWithTheSameShape = isArrayWithTheSameShape && (items[index-1][feature] === items[index][feature]);
 					}
 				}
 
@@ -67,7 +66,7 @@ function getValidShapeArray(cardsArray){
 					while( index < validArray.length){
 						let item = validArray[index];
 						if(index > 0){
-							allAreEqueal = item.shape === validArray[index-1].shape;
+							allAreEqueal = item[feature] === validArray[index-1][feature];
 						}
 
 						index++;
@@ -95,24 +94,70 @@ function getValidShapeArray(cardsArray){
 		}
 	})
 
-	let finalValidShapes = getValidItemsBySize(validShapes);
+	let finalValidShapes = getValidItemsBySize(validShapes, feature);
+	console.log('tamaño', finalValidShapes.length);
 
 	return finalValidShapes;
 }
 
 //Solo pueden ser validos los arreglos que tienen al menos 3 items (ya que el juego es por tercias de cartas)
-function getValidItemsBySize(validShapes){
+function getValidItemsBySize(validShapes, feature){
 	let arrayWithValidSize = [];
 
 	//Aqui podríamos hacer pop 
-	validShapes.forEach(function(items) {
+	for(let index=0; index<validShapes.length; index++  ){
+		let items = validShapes[index];
+
 		if(items.length >= 3){
 			arrayWithValidSize.push(items);
-		}	
-	})
+		}
+	}
+
+	//Validar que no haya sets con los mismos elementos
+	for(let index=0; index<arrayWithValidSize.length; index++  ){
+		let items = arrayWithValidSize[index];
+
+		for(let y=index+1; y<arrayWithValidSize.length; y++  ){
+			let itemsToCompare = arrayWithValidSize[y];
+			if(items.length === itemsToCompare.length){
+				if(hasTheSameElements(items, itemsToCompare, feature)){
+					arrayWithValidSize.splice(y, 1);
+				}
+
+			}
+		}
+	}
 
 	return arrayWithValidSize;
 }
+
+function hasTheSameElements(items, itemsToCompare, feature){
+	let index = 0;
+
+	let hasTheSameItems = true;
+	while(index < items.length && hasTheSameItems){
+		let card = items[index];
+		let featureExist = false;
+
+		let internaleIndex = 0;
+		while(!featureExist && internaleIndex < itemsToCompare.length){
+			let internalCard = itemsToCompare[internaleIndex];
+
+			if(card[feature] == internalCard[feature]){
+				featureExist = true;
+			}
+
+			internaleIndex++
+		}
+
+		hasTheSameItems = (hasTheSameItems && featureExist);
+
+		index++;
+	}
+
+	return hasTheSameItems;
+}
+
 
 module.exports = {
     getValidSets
