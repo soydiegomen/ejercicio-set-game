@@ -9,28 +9,37 @@ const SHADING_STRIPED = 'striped';
 const SHADING_OUTLINED = 'outlined';
 
 function getDummyDeck(){
-	let cardArray = [];
+	let cardsArray = [];
 
-	cardArray.push({ shape: SHAPE_DIAMOND, color: COLOR_RED, number: 1, shading: SHADING_OUTLINED });
-	cardArray.push({ shape: SHAPE_DIAMOND, color: COLOR_GREEN, number: 2, shading: SHADING_OUTLINED });
-	cardArray.push({ shape: SHAPE_DIAMOND, color: COLOR_PURPLE, number: 3, shading: SHADING_STRIPED });
-	cardArray.push({ shape: SHAPE_OVAL, color: COLOR_GREEN, number: 1, shading: SHADING_STRIPED });
+	cardsArray.push({ shape: SHAPE_DIAMOND, color: COLOR_RED, number: 1, shading: SHADING_OUTLINED });
+	cardsArray.push({ shape: SHAPE_DIAMOND, color: COLOR_GREEN, number: 2, shading: SHADING_OUTLINED });
+	cardsArray.push({ shape: SHAPE_DIAMOND, color: COLOR_PURPLE, number: 3, shading: SHADING_STRIPED });
+	cardsArray.push({ shape: SHAPE_OVAL, color: COLOR_GREEN, number: 1, shading: SHADING_STRIPED });
 
-	cardArray.push({ shape: SHAPE_DIAMOND, color: COLOR_RED, number: 2, shading: SHADING_SOLID });
-	cardArray.push({ shape: SHAPE_OVAL, color: COLOR_GREEN, number: 3, shading: SHADING_STRIPED });
-	cardArray.push({ shape: SHAPE_DIAMOND, color: COLOR_PURPLE, number: 2, shading: SHADING_STRIPED });
-	cardArray.push({ shape: SHAPE_DIAMOND, color: COLOR_RED, number: 2, shading: SHADING_OUTLINED });
+	cardsArray.push({ shape: SHAPE_DIAMOND, color: COLOR_RED, number: 2, shading: SHADING_SOLID });
+	cardsArray.push({ shape: SHAPE_OVAL, color: COLOR_GREEN, number: 3, shading: SHADING_STRIPED });
+	cardsArray.push({ shape: SHAPE_DIAMOND, color: COLOR_PURPLE, number: 2, shading: SHADING_STRIPED });
+	cardsArray.push({ shape: SHAPE_DIAMOND, color: COLOR_RED, number: 2, shading: SHADING_OUTLINED });
 
-	cardArray.push({ shape: SHAPE_SQUIGGLES, color: COLOR_PURPLE, number: 1, shading: SHADING_SOLID });
-	cardArray.push({ shape: SHAPE_DIAMOND, color: COLOR_PURPLE, number: 1, shading: SHADING_STRIPED });
-	cardArray.push({ shape: SHAPE_SQUIGGLES, color: COLOR_RED, number: 1, shading: SHADING_STRIPED });
-	cardArray.push({ shape: SHAPE_SQUIGGLES, color: COLOR_PURPLE, number: 2, shading: SHADING_OUTLINED });
+	cardsArray.push({ shape: SHAPE_SQUIGGLES, color: COLOR_PURPLE, number: 1, shading: SHADING_SOLID });
+	cardsArray.push({ shape: SHAPE_DIAMOND, color: COLOR_PURPLE, number: 1, shading: SHADING_STRIPED });
+	cardsArray.push({ shape: SHAPE_SQUIGGLES, color: COLOR_RED, number: 1, shading: SHADING_STRIPED });
+	cardsArray.push({ shape: SHAPE_SQUIGGLES, color: COLOR_PURPLE, number: 2, shading: SHADING_OUTLINED });
 
-	return cardArray;
+	return cardsArray;
 }
 
 
 
 module.exports = {
-    getDummyDeck
+    getDummyDeck,
+    SHAPE_OVAL,
+    SHAPE_SQUIGGLES,
+    SHAPE_DIAMOND,
+    COLOR_RED,
+    COLOR_PURPLE,
+    COLOR_GREEN,
+    SHADING_SOLID,
+    SHADING_STRIPED,
+    SHADING_OUTLINED      
 };
