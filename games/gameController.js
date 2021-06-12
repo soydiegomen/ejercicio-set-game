@@ -1,14 +1,16 @@
+var gameHelper = require('./gameHelper');
 
 const getValidSets = function (req, res) {
-	let result = getDummyResult()
+	let result = runSetGame()
 	res.contentType('application/json');
 	res.send(JSON.stringify(result));
 }
 
-function getDummyResult(){
-    return { resultado : 'success'};;
+function runSetGame(){
+	let result = gameHelper.getDummyDeck();
+    
+	return result;
 }
-
 
 module.exports = {
     getValidSets
