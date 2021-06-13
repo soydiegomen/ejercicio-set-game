@@ -8,34 +8,30 @@ const getValidSets = function (req, res) {
 
 function runSetGame(){
 	let cardsArray = gameHelper.getDummyDeck();
-	result = creteAllPosibleSets(cardsArray);
+	let posibleSets = creteAllPosibleSets(cardsArray);
+	let validShapes = validateSets(posibleSets,'shape');
 
-	return result;
+	return validShapes;
 }
 
 function creteAllPosibleSets(cardsArray){
 	let posibleSets = [];
 
 	for(let i = 0; i < cardsArray.length; i++){
+		//Defino la primer carta
 		let firstCard = cardsArray[i];
-		//let setThreeCards = [];
-		
-		//Agrego la primer carta
-		//setThreeCards.push(firstCard);
 
 		//Comenzar el segundo ciclo por el item en la posición siguiente
 		for(let j = (i+1); j < cardsArray.length; j++){
+			//Defino la segunda carta
 			let secondCard = cardsArray[j];
 
-			//Agrego la segunda carta
-			//setThreeCards.push(secondCard);
-
 			for(let z = (j+1); z < cardsArray.length; z++){
+				//Defino la tercer carta
 				let thirdCard = cardsArray[z];
 
-				//Agrego la tercer carta
+				//Creo el set con las tres cartas
 				let setThreeCards = [firstCard, secondCard, thirdCard ];
-				console.log(setThreeCards);
 				posibleSets.push(setThreeCards);
 			}
 		}
@@ -45,6 +41,39 @@ function creteAllPosibleSets(cardsArray){
 	console.log('no. set posibles', posibleSets.length);
 
 	return posibleSets;
+}
+
+function validateSets(posibleSets, feature){
+	let validSets = [];
+
+	for(let i = 0; i < posibleSets.length; i++){
+		//Defino la primer carta
+		let setToAnalize = posibleSets[i];
+
+		//Todos los sets son de tres cartas por lo cual podemos validar teniendo la certeza de que hay 3 items
+		//Si el feature de los 3 sets es el mismo entonces es un set valido
+		if(
+			setToAnalize[0][feature] == setToAnalize[1][feature] && 
+			setToAnalize[0][feature] == setToAnalize[2][feature] &&
+			setToAnalize[1][feature] == setToAnalize[2][feature])
+			{
+				validSets.push(setToAnalize);
+				console.log('Set valido', setToAnalize);
+			}
+
+		//Si el feature de los 3 sets es diferente es un set valido
+		if(
+			setToAnalize[0][feature] != setToAnalize[1][feature] && 
+			setToAnalize[0][feature] != setToAnalize[2][feature] &&
+			setToAnalize[1][feature] != setToAnalize[2][feature])
+			{
+				validSets.push(setToAnalize);
+				console.log('Set valido', setToAnalize);
+			}
+
+	}
+
+	return validSets;
 }
 
 
