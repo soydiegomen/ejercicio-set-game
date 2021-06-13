@@ -14,10 +14,12 @@ function runSetGame(){
 	let validNumbers = validateSets(validColors,'number');
 	let validShading = validateSets(validNumbers,'shading');
 
-	console.log('Set validos', validShading.length);
-	console.log(validShading);
+	const result = {
+		'no_valid_sets': validShading.length,
+		'sets': validShading
+	};
 
-	return validShading;
+	return result;
 }
 
 function creteAllPosibleSets(cardsArray){
@@ -43,8 +45,6 @@ function creteAllPosibleSets(cardsArray){
 		}
 
 	}
-
-	console.log('no. set posibles', posibleSets.length);
 
 	return posibleSets;
 }
@@ -76,8 +76,6 @@ function validateSets(posibleSets, feature){
 			}
 
 	}
-
-	console.log('No. de set validos', validSets.length);
 
 	return validSets;
 }
