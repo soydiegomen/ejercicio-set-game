@@ -10,8 +10,14 @@ function runSetGame(){
 	let cardsArray = gameHelper.getDummyDeck();
 	let posibleSets = creteAllPosibleSets(cardsArray);
 	let validShapes = validateSets(posibleSets,'shape');
+	let validColors = validateSets(validShapes,'color');
+	let validNumbers = validateSets(validColors,'number');
+	let validShading = validateSets(validNumbers,'shading');
 
-	return validShapes;
+	console.log('Set validos', validShading.length);
+	console.log(validShading);
+
+	return validShading;
 }
 
 function creteAllPosibleSets(cardsArray){
@@ -58,7 +64,6 @@ function validateSets(posibleSets, feature){
 			setToAnalize[1][feature] == setToAnalize[2][feature])
 			{
 				validSets.push(setToAnalize);
-				console.log('Set valido', setToAnalize);
 			}
 
 		//Si el feature de los 3 sets es diferente es un set valido
@@ -68,10 +73,11 @@ function validateSets(posibleSets, feature){
 			setToAnalize[1][feature] != setToAnalize[2][feature])
 			{
 				validSets.push(setToAnalize);
-				console.log('Set valido', setToAnalize);
 			}
 
 	}
+
+	console.log('No. de set validos', validSets.length);
 
 	return validSets;
 }
